@@ -1,14 +1,33 @@
 import React from "react";
 
 /* Components */
-import { Spinner, SpinnerSize } from "@fluentui/react";
+import { Spinner, SpinnerSize, IconButton } from "@fluentui/react";
+import { initializeIcons } from "@uifabric/icons";
+import InfoMessage from "./InfoMessage";
+initializeIcons();
 
-const Post = ({ userPost, spinner }) => {
+const Post = ({
+  userPost,
+  viewport,
+  spinner = false,
+  postsErrorMsg = false,
+  clousePost,
+}) => {
+  const { user, posts } = userPost;
   return (
-    <div className="postDescktop">
-      <h3>{userPost.userName}&apos;s Posts</h3>
+    <div className="post postDescktop">
+      {viewport > 400 && (
+        <IconButton
+          iconProps={{ iconName: "ErrorBadge" }}
+          title="ErrorBadge"
+          onClick={clousePost}
+        />
+      )}
+      <h3>
+        {user.name} {user.username}&apos;s Posts
+      </h3>
 
-      {spinner || !userPost.posts ? (
+      {spinner && (
         <Spinner
           size={SpinnerSize.large}
           styles={{
@@ -20,9 +39,11 @@ const Post = ({ userPost, spinner }) => {
             },
           }}
         />
-      ) : (
-        userPost.posts &&
-        userPost.posts.map((post, index) => {
+      )}
+
+      {posts &&
+        posts.length > 0 &&
+        posts.map((post, index) => {
           return (
             <div key={post.title}>
               <h3>
@@ -31,8 +52,8 @@ const Post = ({ userPost, spinner }) => {
               <p>{post.body}.</p>
             </div>
           );
-        })
-      )}
+        })}
+      {postsErrorMsg && <InfoMessage msg={postsErrorMsg} />}
     </div>
   );
 };

@@ -7,18 +7,63 @@
 .user {
   position: relative;
   width: 230px;
-  height: 300px;
+  & img {
+    cursor: pointer;
+  }
   & h2 {
     font-size: 24px;
   }
 }
 
-.postDescktop {
-  position: relative;
+.post {
+  background-color: white;
+  @media only screen and(min-width:400px) {
+    &Descktop {
+      position: relative;
+      width: 100%;
+      height: max-content;
+      background-color: grey;
+    }
+  }
+}
+
+.popup {
+  border-radius: 0px;
+  &CloseBtn {
+    width: max-content;
+    height: max-content;
+    border: 0px;
+    outline: none;
+    font-size: 16px;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.userWrapper {
+}
+
+.popupUser {
   width: 100%;
-  height: max-content;
-  background-color: grey;
-  @media only screen and(max-width:400px) {
-    display: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and(max-width: 400px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &Info {
+    width: 100%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  &Address {
+    display: flex;
+    flex-direction: column;
+    //justify-content: flex-start;
+    align-items: flex-start;
   }
 }

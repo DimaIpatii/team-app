@@ -1,1 +1,2 @@
-export default "https://jsonplaceholder.typicode.com/users";
+const usersEndpoint = "https://jsonplaceholder.typicode.com/users";
+export default usersEndpoint;

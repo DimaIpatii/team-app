@@ -1,1 +1,2 @@
-export default "https://jsonplaceholder.typicode.com/posts/?userId=";
+const postsEndpoint = "https://jsonplaceholder.typicode.com/posts/?userId=";
+export default postsEndpoint;

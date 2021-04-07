@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 const useFetchPosts = (endpoint, options) => {
   const [posts, setPosts] = useState([]);
   const [spiner, setSpiner] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   // Errors
   const buffer = useRef({});
 
@@ -16,20 +17,26 @@ const useFetchPosts = (endpoint, options) => {
       setSpiner(true);
       const response = await fetch(endpoint + userId, options);
       setSpiner(false);
-      if (response.status === 404)
-        throw new Error("This user does not have any post.");
+
+      if (response.status === 404) throw new Error("not found");
 
       const data = await response.json();
+      if (data.length === 0) throw new Error("no posts");
+
       buffer.current[userId] = data;
       setPosts(data);
       return data;
     } catch (err) {
-      // * Error Componenet:
       console.error(err.message);
+
+      if (err.message === "no posts" || err.message === "not found") {
+        setErrorMsg("This user currently, does not have any post.");
+        setPosts([]);
+      }
     }
   };
 
-  return [posts, fetchPosts, spiner];
+  return [posts, fetchPosts, spiner, errorMsg];
 };
 
 export default useFetchPosts;
