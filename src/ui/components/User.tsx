@@ -13,7 +13,16 @@ import {
   ShimmerElementType,
 } from "@fluentui/react";
 
-const User = ({ user, userSrc, viewPort, getPosts, setShowInfo }) => {
+/* Types */
+import { IUserComponentProps } from "../../types";
+
+const User: React.FunctionComponent<IUserComponentProps> = ({
+  user,
+  userSrc,
+  viewPort,
+  getPosts,
+  setShowInfo,
+}) => {
   const [open, setOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageProps, setImageProps] = useState({});
@@ -50,9 +59,7 @@ const User = ({ user, userSrc, viewPort, getPosts, setShowInfo }) => {
           <Image
             {...imageProps}
             height={"100%"}
-            minHeight={100}
             width={"100%"}
-            minWidth={100}
             alt="userImage"
             onClick={() => setShowInfo(user.id)}
             styles={{ root: { animation: "none", transition: "none" } }}
@@ -61,7 +68,7 @@ const User = ({ user, userSrc, viewPort, getPosts, setShowInfo }) => {
       </div>
       <h2>{user.name}</h2>
       <p>
-        <a href={`mailto:${user.email}`}>{user.email}</a>
+        <a href={`mailto:${String(user.email)}`}>{user.email}</a>
       </p>
       {viewPort > 400 && (
         <PrimaryButton

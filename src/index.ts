@@ -1,15 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./ui/App";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const render = () => {
+  const html = document.getElementById("root");
+  if (!html) throw new Error("No such Element");
+  if (html) {
+    ReactDOM.render(React.createElement(App), html);
+  }
+};
+render();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

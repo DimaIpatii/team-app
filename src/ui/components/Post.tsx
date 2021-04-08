@@ -6,11 +6,14 @@ import { initializeIcons } from "@uifabric/icons";
 import InfoMessage from "./InfoMessage";
 initializeIcons();
 
-const Post = ({
+/* Types */
+import { IPostComponentProps } from "../../types";
+
+const Post: React.FunctionComponent<IPostComponentProps> = ({
   userPost,
   viewport,
   spinner = false,
-  postsErrorMsg = false,
+  postsErrorMsg,
   clousePost,
 }) => {
   const { user, posts } = userPost;

@@ -4,6 +4,9 @@ import withReactContent from "sweetalert2-react-content";
 
 /* Styles */
 import "./App.scss";
+
+/* Types */
+import { IUserData } from "../types";
 /* Assets */
 import logo from "../assets/logo.svg";
 import userImage from "../assets/user.svg";
@@ -25,7 +28,7 @@ import useFetch from "../helpers/useFetch";
 import useFetchPosts from "../helpers/useFetchPosts";
 import { getLastElId } from "../helpers/getLastElId";
 
-function App() {
+function App(): JSX.Element {
   const MySwal = withReactContent(Swal);
   const [users, usersErrorMsg, spinner] = useFetch(usersEndpoint);
   const [posts, fetchPost, postSpinner, postsErrorMsg] = useFetchPosts(
@@ -33,52 +36,66 @@ function App() {
   );
 
   const [viewPort, setViewPort] = useState(window.innerWidth);
-  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
-  const lastUserId = useRef(null);
-  const currId = useRef(null);
-  const currIconId = useRef(null);
-  const usersContainer = useRef(null);
+  const lastUserId = useRef<number | null>(null);
+  const currId = useRef<number | null>(null);
+  const currIconId = useRef<number | null>(null);
+  const usersContainer = useRef<HTMLDivElement | null>(null);
+  const [data, setData] = useState<IUserData>({ user: {}, posts: [] });
 
-  const [data, setData] = useState({});
-  const getPosts = (userId) => {
+  const getPosts = (userId: number) => {
     currId.current = userId;
-    lastUserId.current = getLastElId(userId, usersContainer.current);
 
-    fetchPost(userId);
+    let id;
+    if (usersContainer.current)
+      id = getLastElId(userId, usersContainer.current);
+    if (id) lastUserId.current = id;
+
+    fetchPost(userId).catch((err) => {
+      console.error(err.message);
+    });
   };
 
   const clousePost = () => {
     lastUserId.current = null;
     currId.current = null;
-    setData({});
+    setData({ user: {}, posts: [] });
   };
 
-  const showPopup = (userId) => {
+  const showPopup = (userId: number) => {
     currIconId.current = userId;
     setShowInfo(true);
 
     if (currId.current !== userId) {
       lastUserId.current = null;
     }
-    fetchPost(userId);
+    fetchPost(userId).catch((err) => {
+      console.error(err.message);
+    });
   };
 
   const scrollToChild = () => {
-    const parrent = usersContainer.current;
-    const children = usersContainer.current.children[currId.current - 1];
+    if (usersContainer.current && currId.current !== null) {
+      const parrent = usersContainer.current;
+      const parrentsChildren: any[] = Array.from(
+        usersContainer.current.children
+      );
 
-    parrent.scrollTo({
-      top: children.offsetTop - parrent.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
+      const children: HTMLElement = parrentsChildren[currId.current - 1];
+
+      parrent.scrollTo({
+        top: children.offsetTop - parrent.offsetTop,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   };
   /* ********************************************************* */
 
   /* Posts Handler */
   useEffect(() => {
-    if (showInfo) {
+    if (showInfo && currIconId.current !== null) {
       setData({
         user: users[currIconId.current - 1],
         posts: posts,
@@ -86,16 +103,19 @@ function App() {
     }
 
     if (posts.length === 0) return;
-    if (viewPort > 400 && !showInfo) {
-      setData({ user: users[currId.current - 1], posts: posts });
+    if (viewPort > 400 && !showInfo && currId.current !== null) {
+      setData({
+        user: users[currId.current - 1],
+        posts: posts,
+      });
       scrollToChild();
     }
   }, [posts]); // eslint-disable-line
 
   /* Resize Handler */
   useEffect(() => {
-    const timeOutPost = (mls) => {
-      let timer;
+    const timeOutPost = (mls: number) => {
+      let timer: any;
 
       if (!lastUserId.current) {
         return () => {
@@ -107,15 +127,18 @@ function App() {
         };
       } else {
         return () => {
-          lastUserId.current = getLastElId(
-            currId.current,
-            usersContainer.current
-          );
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            timer = null;
-            setViewPort(window.innerWidth);
-          }, mls);
+          if (currId.current && usersContainer.current) {
+            lastUserId.current = getLastElId(
+              currId.current,
+              usersContainer.current
+            );
+
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              timer = null;
+              setViewPort(window.innerWidth);
+            }, mls);
+          }
         };
       }
     };
@@ -147,11 +170,15 @@ function App() {
       showCloseButton: true,
       closeButtonHtml: <ClousePopup />,
       buttonsStyling: false,
-    }).then((popup) => {
-      if (popup.isDismissed) {
-        setShowInfo(false);
-      }
-    });
+    })
+      .then((popup) => {
+        if (popup.isDismissed) {
+          setShowInfo(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   }, [data]); // eslint-disable-line
 
   console.log(data);

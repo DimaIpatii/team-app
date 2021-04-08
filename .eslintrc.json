@@ -4,36 +4,59 @@
     "node": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    /* "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking" */
-    "plugin:jsx-a11y/recommended",
-    "prettier"
-  ],
-  /* "parser": "@typescript-eslint/parser", */
+  "extends": ["eslint:recommended", "prettier"],
+  "parser": "@typescript-eslint/parser",
+
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": 2020,
     "sourceType": "module"
-    /* "project": "tsconfig.json" */
   },
-  /* "plugins": ["react", "@typescript-eslint"], */
-  "plugins": ["react", "jsx-a11y"],
-  "rules": {
-    "react/prop-types": "off",
-    "react/no-children-prop": "off",
-    "prefer-const": "error"
+  "plugins": ["react", "jsx-a11y", "@typescript-eslint", "prettier"],
 
-    /* "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-unused-params": "off" */
+  "rules": {
+    "prefer-const": "error"
   },
+  "overrides": [
+    /* Client Side */
+    {
+      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "parserOptions": {
+        "project": "tsconfig.json"
+      },
+      "rules": {
+        "react/prop-types": "off",
+        "react/no-children-prop": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-params": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/restrict-plus-operands": "off"
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:jsx-a11y/recommended"
+      ]
+    }
+  ],
   "settings": {
     "react": {
       "version": "detected"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   }
 }

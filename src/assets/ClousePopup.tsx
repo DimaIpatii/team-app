@@ -4,7 +4,7 @@ import { initializeIcons } from "@uifabric/icons";
 
 initializeIcons();
 
-const ClousePopup = () => {
+const ClousePopup = (): JSX.Element => {
   return (
     <>
       {`CLOSE `}

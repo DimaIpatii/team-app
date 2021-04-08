@@ -5,8 +5,10 @@ import { initializeIcons } from "@uifabric/icons";
 import { MessageBar, MessageBarType } from "@fluentui/react";
 initializeIcons();
 
-function InfoMessage({ msg }) {
-  return <MessageBar MessageBarType={MessageBarType.info}>{msg}</MessageBar>;
-}
+const InfoMessage: React.FunctionComponent<{ msg: string }> = ({
+  msg,
+}): JSX.Element => {
+  return <MessageBar messageBarType={MessageBarType.info}>{msg}</MessageBar>;
+};
 
 export default InfoMessage;

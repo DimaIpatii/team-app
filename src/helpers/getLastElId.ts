@@ -1,6 +1,10 @@
-export const getLastElId = (userId, usersContainer) => {
+export const getLastElId = (
+  userId: number,
+  usersContainer: HTMLElement
+): number | null => {
   const containerWidth = usersContainer.offsetWidth;
-  const children = Array(...usersContainer.children);
+
+  const children: any[] = Array.from(usersContainer.children);
 
   /* Create Rows */
   const elementsInContainer = [];
@@ -33,6 +37,10 @@ export const getLastElId = (userId, usersContainer) => {
   const lastIdRow = elementsInContainer.find(
     (elements) => userId <= Number(elements[elements.length - 1].dataset.userid)
   );
+
+  if (!lastIdRow) {
+    return null;
+  }
 
   const theLastUserId = Number(lastIdRow[lastIdRow.length - 1].dataset.userid);
   return theLastUserId;

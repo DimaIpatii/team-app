@@ -3,8 +3,14 @@ import React, { useState, useEffect } from "react";
 import { PrimaryButton } from "@fluentui/react";
 import Post from "./Post";
 import InfoMessage from "./InfoMessage";
+/* Typescript */
+import { IPopupComponentProps } from "../../types";
 
-const Popup = ({ userData, imgSrc, postsErrorMsg }) => {
+const Popup: React.FunctionComponent<IPopupComponentProps> = ({
+  userData,
+  imgSrc,
+  postsErrorMsg,
+}): JSX.Element => {
   const [viewport, setViewport] = useState(window.innerWidth);
   const { user } = userData;
   const { address, company } = user;
@@ -12,7 +18,7 @@ const Popup = ({ userData, imgSrc, postsErrorMsg }) => {
   /* ************************************************** */
   useEffect(() => {
     const viewPort = () => {
-      let time;
+      let time: any;
       return () => {
         clearTimeout(time);
         time = setTimeout(() => {
@@ -33,19 +39,19 @@ const Popup = ({ userData, imgSrc, postsErrorMsg }) => {
         <div className="popupUserInfo">
           <h3>{user.name}</h3>
           <p>
-            USERNAME: <span>{user.username}</span>
+            USERNAME: <span>{String(user.username)}</span>
           </p>
-          <a href={`mailto:${user.email}`}>{user.email}</a>
+          <a href={`mailto:${String(user.email)}`}>{String(user.email)}</a>
           <PrimaryButton text="visit website" />
         </div>
       </div>
       <div className="popupUserAddress">
         <h3>Address:</h3>
         <p>
-          {address.street}, {address.suite}
+          {address.street}, {String(address.suite)}
         </p>
         <p>
-          {address.city} - {address.zipcode}
+          {String(address.city)} - {String(address.zipcode)}
         </p>
 
         <h3>Phone:</h3>
