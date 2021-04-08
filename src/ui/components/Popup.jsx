@@ -31,9 +31,10 @@ const Popup = ({ userData, imgSrc, postsErrorMsg }) => {
       <div className="popupUser">
         <img src={imgSrc} alt="user" />
         <div className="popupUserInfo">
-          <h3>
-            {user.name} {user.username}
-          </h3>
+          <h3>{user.name}</h3>
+          <p>
+            USERNAME: <span>{user.username}</span>
+          </p>
           <a href={`mailto:${user.email}`}>{user.email}</a>
           <PrimaryButton text="visit website" />
         </div>

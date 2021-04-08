@@ -44,12 +44,16 @@ const Post = ({
       {posts &&
         posts.length > 0 &&
         posts.map((post, index) => {
+          const title =
+            post.title.charAt(0).toUpperCase() + post.title.slice(1);
+          const paragraph =
+            post.body.charAt(0).toUpperCase() + post.body.slice(1);
           return (
             <div key={post.title}>
               <h3>
-                {index + 1}. {post.title}.
+                {index + 1}. {title}.
               </h3>
-              <p>{post.body}.</p>
+              <p>{paragraph}.</p>
             </div>
           );
         })}

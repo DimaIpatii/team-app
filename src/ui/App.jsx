@@ -31,8 +31,7 @@ function App() {
   const [posts, fetchPost, postSpinner, postsErrorMsg] = useFetchPosts(
     postsEndpoint
   );
-  const [userPost, setUserPost] = useState({});
-  const [popupData, setPopupData] = useState({});
+
   const [viewPort, setViewPort] = useState(window.innerWidth);
   const [showInfo, setShowInfo] = useState(false);
 
@@ -41,36 +40,46 @@ function App() {
   const currIconId = useRef(null);
   const usersContainer = useRef(null);
 
+  const [data, setData] = useState({});
   const getPosts = (userId) => {
     currId.current = userId;
     lastUserId.current = getLastElId(userId, usersContainer.current);
 
     fetchPost(userId);
-
-    setUserPost({
-      user: users[userId - 1],
-    });
   };
 
   const clousePost = () => {
     lastUserId.current = null;
     currId.current = null;
-    setUserPost({});
+    setData({});
   };
 
   const showPopup = (userId) => {
     currIconId.current = userId;
     setShowInfo(true);
 
+    if (currId.current !== userId) {
+      lastUserId.current = null;
+    }
     fetchPost(userId);
   };
 
+  const scrollToChild = () => {
+    const parrent = usersContainer.current;
+    const children = usersContainer.current.children[currId.current - 1];
+
+    parrent.scrollTo({
+      top: children.offsetTop - parrent.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   /* ********************************************************* */
 
   /* Posts Handler */
   useEffect(() => {
     if (showInfo) {
-      setPopupData({
+      setData({
         user: users[currIconId.current - 1],
         posts: posts,
       });
@@ -78,7 +87,8 @@ function App() {
 
     if (posts.length === 0) return;
     if (viewPort > 400 && !showInfo) {
-      setUserPost({ user: users[currId.current - 1], posts: posts });
+      setData({ user: users[currId.current - 1], posts: posts });
+      scrollToChild();
     }
   }, [posts]); // eslint-disable-line
 
@@ -128,7 +138,7 @@ function App() {
       },
       html: (
         <Popup
-          userData={popupData}
+          userData={data}
           imgSrc={userImage}
           postsErrorMsg={postsErrorMsg}
         />
@@ -142,11 +152,11 @@ function App() {
         setShowInfo(false);
       }
     });
-  }, [popupData]); // eslint-disable-line
+  }, [data]); // eslint-disable-line
 
-  //console.log(popupData, viewPort);
+  console.log(data);
   return (
-    <div className="wrapper">
+    <>
       <Stack
         horizontal={false}
         horizontalAlign="center"
@@ -171,7 +181,7 @@ function App() {
               /* Shows User + Post */
               if (
                 lastUserId.current === user.id &&
-                userPost &&
+                data.user &&
                 viewPort > 400
               ) {
                 return (
@@ -185,7 +195,7 @@ function App() {
                       setShowInfo={showPopup}
                     />
                     <Post
-                      userPost={userPost}
+                      userPost={data}
                       viewport={viewPort}
                       spinner={postSpinner}
                       postsErrorMsg={postsErrorMsg}
@@ -236,7 +246,7 @@ function App() {
           <p>© All rights reserved</p>
         </Stack>
       </footer>
-    </div>
+    </>
   );
 }
 
