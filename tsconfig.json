@@ -4,7 +4,6 @@
     "module": "esnext",
     "allowJs": true,
     "declaration": true,
-    //"noImplicitAny": true,
     "outDir": "prod",
     "rootDir": "src",
     "esModuleInterop": true,

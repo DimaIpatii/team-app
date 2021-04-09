@@ -3,8 +3,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 /* Styles */
-import "./App.scss";
-
+import "../index.scss";
 /* Types */
 import { IUserData } from "../types";
 /* Assets */
@@ -104,11 +103,11 @@ function App(): JSX.Element {
 
     if (posts.length === 0) return;
     if (viewPort > 400 && !showInfo && currId.current !== null) {
+      scrollToChild();
       setData({
         user: users[currId.current - 1],
         posts: posts,
       });
-      scrollToChild();
     }
   }, [posts]); // eslint-disable-line
 
@@ -157,6 +156,7 @@ function App(): JSX.Element {
     MySwal.fire({
       customClass: {
         popup: "popup",
+        content: "popupContent",
         closeButton: "popupCloseBtn",
       },
       html: (
@@ -184,23 +184,16 @@ function App(): JSX.Element {
   console.log(data);
   return (
     <>
-      <Stack
-        horizontal={false}
-        horizontalAlign="center"
-        styles={{ root: { backgroundColor: "#006BA1" } }}
-      >
-        <Stack.Item>
-          <img src={logo} alt="Logo" className="logo" />
-        </Stack.Item>
+      <header className="header">
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
 
-        <Stack styles={{ root: { backgroundColor: "white", width: "100%" } }}>
-          <ul>
-            <li>Teams</li>
-          </ul>
-        </Stack>
-      </Stack>
-      <main>
-        <div className="users" ref={usersContainer}>
+      <main className="main">
+        <div>
+          <h1 className="mainCaption">Team</h1>
+        </div>
+
+        <div className="usersWrapper" ref={usersContainer}>
           {users &&
             usersErrorMsg.length === 0 &&
             spinner === false &&
@@ -209,7 +202,7 @@ function App(): JSX.Element {
               if (
                 lastUserId.current === user.id &&
                 data.user &&
-                viewPort > 400
+                viewPort > 768
               ) {
                 return (
                   <React.Fragment key={user.id}>
@@ -265,12 +258,17 @@ function App(): JSX.Element {
           horizontal={true}
           horizontalAlign="space-between"
           verticalAlign="center"
-          styles={{ root: { backgroundColor: "#006BA1" } }}
+          styles={{
+            root: {
+              maxWidth: 1600,
+              margin: "0 auto",
+            },
+          }}
+          tokens={{ padding: "30px 0" }}
+          className="footerContentWrapper"
         >
-          <div>
-            <img src={logo} alt="Logo" className="logoSmall" />
-          </div>
-          <p>© All rights reserved</p>
+          <img src={logo} alt="Logo" className="logo logoSmall" />
+          <p className="footerCoopyright">© All rights reserved</p>
         </Stack>
       </footer>
     </>

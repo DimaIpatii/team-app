@@ -1,0 +1,69 @@
+@keyframes ShowPost {
+  0% {
+    height: 0%;
+  }
+  100% {
+    //min-height: 100%;
+    height: 100%;
+  }
+}
+
+.postWrapper {
+  @media only screen and(min-width:768px) {
+    /* background-color: grey; */
+    position: relative;
+    width: 100%;
+    min-height: 20rem;
+    height: max-content;
+
+    margin: 6rem 0;
+  }
+}
+
+.post {
+  position: relative;
+  background-color: $bg-primary;
+  height: 100%;
+  padding: 4rem;
+  border-radius: 2rem;
+
+  @media only screen and(max-width: 768px) {
+    text-align: start;
+    padding: 0rem;
+  }
+
+  &AuthorName {
+    position: relative;
+    font-size: $text-xl;
+    color: $primary;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    &::after {
+      position: absolute;
+      content: "";
+      width: 5.5rem;
+      height: 0.2rem;
+      background-color: $primary;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  &Caption {
+    font-size: $text-xl;
+    color: $primary;
+    margin-bottom: 3rem;
+  }
+  &Paragraph {
+    margin-bottom: 3rem;
+    font-size: $text-m;
+  }
+
+  @media only screen and (min-width: 769px) {
+    background-color: $bg-secondary;
+
+    //height: max-content;
+
+    animation-name: ShowPost;
+    animation-duration: 10s;
+  }
+}

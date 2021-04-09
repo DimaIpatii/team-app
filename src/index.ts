@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import "./index.scss";
+
+/* Components */
 import App from "./ui/App";
 import reportWebVitals from "./reportWebVitals";
 

@@ -1,1 +1,28 @@
+/* Abstracts */
+@import "./styles/sass/abstracts/variables";
+@import "./styles/sass/abstracts/mixins";
+@import "./styles/sass/abstracts/mediaQmanager";
 
+/* Vendors */
+@import "./styles/sass/base/reset";
+@import "./styles/sass/base/typography";
+
+/* Base */
+
+/* Layout */
+@import "./styles/sass/layout/flexbox";
+@import "./styles/sass/layout/footer";
+@import "./styles/sass/layout/header";
+@import "./styles/sass/layout/main";
+@import "./styles/sass/layout/root";
+@import "./styles/sass/layout/usersWrapper";
+
+/* Components */
+@import "./styles/sass/components/logo";
+@import "./styles/sass/components/popup";
+@import "./styles/sass/components/post";
+@import "./styles/sass/components/user";
+
+/* Pages */
+
+/* Themes */

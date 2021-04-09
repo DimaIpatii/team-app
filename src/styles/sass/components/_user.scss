@@ -1,0 +1,29 @@
+.user {
+  text-align: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  position: relative;
+  width: 230px;
+  height: max-content;
+  margin-bottom: 4rem;
+
+  &ImageWrapper {
+    margin: 0 auto;
+    @include size(15rem);
+    margin-bottom: 2rem;
+  }
+  &Name {
+    font-size: $text-xl;
+    margin-bottom: 0.5rem;
+  }
+  &Mail {
+    margin-bottom: 4rem;
+    & a {
+      font-size: $text-l;
+      list-style: none;
+      color: $primary;
+    }
+  }
+}

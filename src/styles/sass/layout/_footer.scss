@@ -1,0 +1,23 @@
+.footer {
+  background-color: $primary;
+
+  &ContentWrapper {
+    @media only screen and(max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &Coopyright {
+    font-size: $text-l;
+    color: $text-color-light;
+
+    @media only screen and(max-width: 768px) {
+      font-size: $text-m;
+    }
+  }
+  /* &Content {
+    margin: 0 auto;
+    max-width: 160rem;
+  } */
+}

@@ -47,7 +47,7 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
 
   return (
     <div key={user.id} ref={elRef} data-userid={user.id} className={`user`}>
-      <div style={{ width: 150, height: 150 }}>
+      <div className="userImageWrapper">
         <Shimmer
           shimmerElements={[
             { type: ShimmerElementType.circle, width: 150, height: 150 },
@@ -62,21 +62,30 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
             width={"100%"}
             alt="userImage"
             onClick={() => setShowInfo(user.id)}
-            styles={{ root: { animation: "none", transition: "none" } }}
+            styles={{
+              root: {
+                animation: "none",
+                transition: "none",
+                cursor: "pointer",
+              },
+            }}
           />
         </Shimmer>
       </div>
-      <h2>{user.name}</h2>
-      <p>
+      <h2 className="userName">{user.name}</h2>
+      <p className="userMail">
         <a href={`mailto:${String(user.email)}`}>{user.email}</a>
       </p>
-      {viewPort > 400 && (
+      {viewPort > 768 && (
         <PrimaryButton
           onClick={() => {
             getPosts(user.id);
             setOpen(!open);
           }}
-          text="Read Post"
+          styles={{
+            root: { borderRadius: "none", backgroundColor: "#006BA1" },
+          }}
+          text="READ POST"
         />
       )}
     </div>

@@ -1,0 +1,31 @@
+.main {
+  height: calc(100% - 29rem);
+  max-width: 160rem;
+  margin: 5rem auto 0 auto;
+  overflow: hidden;
+
+  @media only screen and(max-width: 768px) {
+    height: auto;
+    min-height: 100%;
+    padding: 0 3rem;
+  }
+
+  &Caption {
+    width: max-content;
+    position: relative;
+    font-size: $text-xxl;
+    text-transform: uppercase;
+    color: $primary;
+    border-bottom: 50%;
+
+    &::after {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      content: "";
+      width: 50%;
+      height: 0.3rem;
+      background-color: $primary;
+    }
+  }
+}
