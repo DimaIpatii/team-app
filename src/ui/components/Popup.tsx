@@ -33,7 +33,7 @@ const Popup: React.FunctionComponent<IPopupComponentProps> = ({
   });
 
   return (
-    <div className="userWrapper">
+    <div className="popupContent">
       <div className="popupUser">
         <img src={imgSrc} alt="user" className="popupUserImage" />
 
@@ -48,7 +48,7 @@ const Popup: React.FunctionComponent<IPopupComponentProps> = ({
             </a>
           </div>
           <PrimaryButton
-            href="https://www.google.com/"
+            href="https://aalto.it/"
             target="_blank"
             text="visit website"
             styles={{

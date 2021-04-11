@@ -1,12 +1,8 @@
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   background-color: $primary;
   height: 12rem;
 
-  @media only screen and(max-width: 768px) {
+  @include viewport("tab-port") {
     height: 10rem;
   }
 }

@@ -1,13 +1,14 @@
 .logo {
   @include size(19.6rem, 8rem);
 
-  @media only screen and(max-width: 768px) {
+  @include viewport("tab-port") {
     @include size(19.6rem, 6rem);
   }
+
   &Small {
     @include size(14.7rem, 6rem);
 
-    @media only screen and(max-width: 768px) {
+    @include viewport("tab-port") {
       @include size(14.7rem, 5rem);
       margin-bottom: 3rem;
     }

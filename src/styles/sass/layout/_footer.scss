@@ -1,23 +1,13 @@
 .footer {
   background-color: $primary;
+  padding: 3rem 2rem;
 
   &ContentWrapper {
-    @media only screen and(max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
-  &Coopyright {
-    font-size: $text-l;
-    color: $text-color-light;
-
-    @media only screen and(max-width: 768px) {
-      font-size: $text-m;
-    }
-  }
-  /* &Content {
+    width: 100%;
     margin: 0 auto;
-    max-width: 160rem;
-  } */
+    padding: 0 2rem;
+
+    @include calcPaddingLeft;
+    @include calcPaddingRight;
+  }
 }

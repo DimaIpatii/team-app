@@ -1,0 +1,76 @@
+/* ********************************************************
+Header:
+*********************************************************/
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ********************************************************
+User Wrapper:
+*********************************************************/
+.usersWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ********************************************************
+Footer:
+*********************************************************/
+.footerContentWrapper {
+  @include viewport("tab-port") {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ********************************************************
+Popup Component:
+*********************************************************/
+/* Styles For Custom Popup Components*/
+.popupUser {
+  display: flex;
+  justify-content: space-between;
+
+  @include viewport("tab-port") {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &InfoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    @include viewport("tab-port") {
+      align-items: center;
+    }
+  }
+}
+
+/* ********************************************************
+User Component:
+*********************************************************/
+
+.user {
+  flex-basis: 16.6%;
+
+  @include viewportAt(1434px) {
+    flex-basis: 19.9%;
+  }
+  @include viewportAt(1211px) {
+    flex-basis: 24.9%;
+  }
+  @include viewportAt(970px) {
+    flex-basis: 33%;
+  }
+  @include viewportAt(768px) {
+    flex-basis: 50%;
+  }
+}

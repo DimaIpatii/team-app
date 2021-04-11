@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 /* Components */
 import { Spinner, SpinnerSize, IconButton } from "@fluentui/react";
@@ -17,26 +17,39 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
   clousePost,
 }): JSX.Element => {
   const { user, posts } = userPost;
+  const [hide, setHide] = useState(false);
   return (
     <div className="postWrapper">
-      <div className="post">
+      <div className={`post ${hide ? "postHide" : ""}`}>
         {viewport > 768 && (
           <IconButton
             iconProps={{ iconName: "ErrorBadge" }}
             title="ErrorBadge"
-            onClick={clousePost}
+            onClick={() => {
+              if (clousePost) {
+                clousePost();
+              }
+
+              setHide(true);
+            }}
             styles={{
               root: {
                 position: "absolute",
                 top: 25,
                 right: 25,
                 backgroundColor: "transparent",
+                zIndex: 100,
               },
               rootHovered: {
                 backgroundColor: "transparent",
               },
               icon: {
+                width: 30,
+                height: 30,
                 fontSize: 20,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               },
             }}
           />
@@ -67,7 +80,7 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
             const paragraph =
               post.body.charAt(0).toUpperCase() + post.body.slice(1);
             return (
-              <div key={post.title}>
+              <div key={post.title} className="postContent">
                 <h3 className="postCaption">
                   {index + 1}. {title}.
                 </h3>

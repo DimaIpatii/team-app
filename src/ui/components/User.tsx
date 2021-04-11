@@ -47,47 +47,49 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
 
   return (
     <div key={user.id} ref={elRef} data-userid={user.id} className={`user`}>
-      <div className="userImageWrapper">
-        <Shimmer
-          shimmerElements={[
-            { type: ShimmerElementType.circle, width: 150, height: 150 },
-          ]}
-          height={150}
-          width={150}
-          isDataLoaded={isLoaded}
-        >
-          <Image
-            {...imageProps}
-            height={"100%"}
-            width={"100%"}
-            alt="userImage"
-            onClick={() => setShowInfo(user.id)}
-            styles={{
-              root: {
-                animation: "none",
-                transition: "none",
-                cursor: "pointer",
-              },
+      <div className="userInner">
+        <div className="userImageWrapper">
+          <Shimmer
+            shimmerElements={[
+              { type: ShimmerElementType.circle, width: 150, height: 150 },
+            ]}
+            height={150}
+            width={150}
+            isDataLoaded={isLoaded}
+          >
+            <Image
+              {...imageProps}
+              height={"100%"}
+              width={"100%"}
+              alt="userImage"
+              onClick={() => setShowInfo(user.id)}
+              styles={{
+                root: {
+                  animation: "none",
+                  transition: "none",
+                  cursor: "pointer",
+                },
+              }}
+            />
+          </Shimmer>
+        </div>
+        <h2 className="userName">{user.name}</h2>
+        <p className="userMail">
+          <a href={`mailto:${String(user.email)}`}>{user.email}</a>
+        </p>
+        {viewPort > 768 && (
+          <PrimaryButton
+            onClick={() => {
+              getPosts(user.id);
+              setOpen(!open);
             }}
+            styles={{
+              root: { borderRadius: "none", backgroundColor: "#006BA1" },
+            }}
+            text="READ POST"
           />
-        </Shimmer>
+        )}
       </div>
-      <h2 className="userName">{user.name}</h2>
-      <p className="userMail">
-        <a href={`mailto:${String(user.email)}`}>{user.email}</a>
-      </p>
-      {viewPort > 768 && (
-        <PrimaryButton
-          onClick={() => {
-            getPosts(user.id);
-            setOpen(!open);
-          }}
-          styles={{
-            root: { borderRadius: "none", backgroundColor: "#006BA1" },
-          }}
-          text="READ POST"
-        />
-      )}
     </div>
   );
 };

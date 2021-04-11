@@ -1,13 +1,31 @@
 .user {
-  text-align: center;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
   position: relative;
-  width: 230px;
-  height: max-content;
   margin-bottom: 4rem;
+  width: 16.6%;
+  box-sizing: border-box;
+  /* border: 1px solid blue; */
+
+  @include viewportAt(1434px) {
+    width: 19.9%;
+  }
+  @include viewportAt(1211px) {
+    width: 24.9%;
+  }
+  @include viewportAt(970px) {
+    width: 33.3%;
+  }
+  @include viewportAt(768px) {
+    width: 50%;
+  }
+  @include viewportAt(414px) {
+    width: 100%;
+  }
+
+  &Inner {
+    /* border: 1px solid grey; */
+    width: 230px;
+    height: max-content;
+  }
 
   &ImageWrapper {
     margin: 0 auto;
@@ -15,15 +33,9 @@
     margin-bottom: 2rem;
   }
   &Name {
-    font-size: $text-xl;
     margin-bottom: 0.5rem;
   }
   &Mail {
     margin-bottom: 4rem;
-    & a {
-      font-size: $text-l;
-      list-style: none;
-      color: $primary;
-    }
   }
 }

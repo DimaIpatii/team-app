@@ -2,3 +2,63 @@
   width: $width;
   height: $height;
 }
+
+@mixin calcMaxWidth {
+  max-width: calc(162rem + ((16.6% - 230px) / 2));
+
+  @include viewportAt(1434px) {
+    max-width: calc(162rem + ((19.9% - 230px) / 2));
+  }
+  @include viewportAt(1211px) {
+    max-width: calc(162rem + ((24.9% - 230px) / 2));
+  }
+  @include viewportAt(970px) {
+    max-width: calc(162rem + ((33% - 230px) / 2));
+  }
+  @include viewportAt(768px) {
+    max-width: calc(162rem + ((50% - 230px) / 2));
+  }
+  @include viewportAt(520px) {
+    max-width: 100%;
+  }
+}
+
+@mixin calcPaddingLeft {
+  padding-left: calc((16.6% - 230px) / 1.5);
+
+  @include viewportAt(1434px) {
+    padding-left: calc((19.9% - 230px) / 1.5);
+  }
+  @include viewportAt(1211px) {
+    padding-left: calc((24.9% - 230px) / 1.5);
+  }
+  @include viewportAt(970px) {
+    padding-left: calc((33% - 230px) / 1.5);
+  }
+  @include viewportAt(768px) {
+    padding-left: calc((50% - 230px) / 1.5);
+  }
+  @include viewportAt(520px) {
+    padding-left: 0;
+  }
+}
+
+@mixin calcPaddingRight {
+  padding-right: calc((16.6% - 230px) / 1.5);
+
+  @include viewportAt(1434px) {
+    padding-right: calc((19.9% - 230px) / 1.5);
+  }
+  @include viewportAt(1211px) {
+    padding-right: calc((24.9% - 230px) / 1.5);
+  }
+  @include viewportAt(970px) {
+    padding-right: calc((33% - 230px) / 1.5);
+  }
+  @include viewportAt(768px) {
+    padding-right: calc((50% - 230px) / 1.5);
+  }
+  @include viewportAt(520px) {
+    padding-right: 0;
+  }
+}

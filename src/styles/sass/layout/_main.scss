@@ -1,21 +1,20 @@
 .main {
-  height: calc(100% - 29rem);
-  max-width: 160rem;
+  @include calcMaxWidth;
+  min-height: calc(100% - 29rem);
+  height: auto;
   margin: 5rem auto 0 auto;
+  padding: 0 2rem;
   overflow: hidden;
 
-  @media only screen and(max-width: 768px) {
-    height: auto;
-    min-height: 100%;
-    padding: 0 3rem;
+  &GridWrapper {
+    /* border: 1px solid red; */
+    min-width: 100%;
+    @include calcPaddingLeft;
   }
 
   &Caption {
     width: max-content;
     position: relative;
-    font-size: $text-xxl;
-    text-transform: uppercase;
-    color: $primary;
     border-bottom: 50%;
 
     &::after {

@@ -54,6 +54,11 @@ function App(): JSX.Element {
     fetchPost(userId).catch((err) => {
       console.error(err.message);
     });
+
+    setData({
+      user: users[userId - 1],
+      posts: [],
+    });
   };
 
   const clousePost = () => {
@@ -82,12 +87,16 @@ function App(): JSX.Element {
       );
 
       const children: HTMLElement = parrentsChildren[currId.current - 1];
-
-      parrent.scrollTo({
-        top: children.offsetTop - parrent.offsetTop,
-        left: 0,
-        behavior: "smooth",
-      });
+      console.log(children.offsetTop, parrent.offsetTop);
+      const root = document.querySelector(".root");
+      if (root) {
+        window.scrollTo({
+          top: children.offsetTop - parrent.offsetTop,
+          //top: 200,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
     }
   };
   /* ********************************************************* */
@@ -181,31 +190,70 @@ function App(): JSX.Element {
       });
   }, [data]); // eslint-disable-line
 
-  console.log(data);
+  //console.log(data);
   return (
     <>
       <header className="header">
-        <img src={logo} alt="Logo" className="logo" />
+        <a href="https://aalto.it/" target="_blanc">
+          <img src={logo} alt="Logo" className="logo" />
+        </a>
       </header>
 
       <main className="main">
-        <div>
-          <h1 className="mainCaption">Team</h1>
-        </div>
+        <div className="mainGridWrapper">
+          <div>
+            <h1 className="mainCaption">Team</h1>
+          </div>
 
-        <div className="usersWrapper" ref={usersContainer}>
-          {users &&
-            usersErrorMsg.length === 0 &&
-            spinner === false &&
-            users.map((user) => {
-              /* Shows User + Post */
-              if (
-                lastUserId.current === user.id &&
-                data.user &&
-                viewPort > 768
-              ) {
-                return (
-                  <React.Fragment key={user.id}>
+          <div className="usersWrapper" ref={usersContainer}>
+            {users &&
+              usersErrorMsg.length === 0 &&
+              spinner === false &&
+              users.map((user) => {
+                /* Shows User + Post */
+                if (
+                  lastUserId.current === user.id &&
+                  data.user &&
+                  viewPort > 768
+                ) {
+                  return (
+                    <React.Fragment key={user.id}>
+                      <User
+                        key={user.id}
+                        user={user}
+                        userSrc={userImage}
+                        viewPort={viewPort}
+                        getPosts={getPosts}
+                        setShowInfo={showPopup}
+                      />
+                      {data.posts.length > 0 ? (
+                        <Post
+                          userPost={data}
+                          viewport={viewPort}
+                          spinner={postSpinner}
+                          postsErrorMsg={postsErrorMsg}
+                          clousePost={clousePost}
+                        />
+                      ) : (
+                        <div className="postWrapper">
+                          <Spinner
+                            size={SpinnerSize.large}
+                            styles={{
+                              root: {
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%,-50%)",
+                              },
+                            }}
+                          />
+                        </div>
+                      )}
+                    </React.Fragment>
+                  );
+                } else {
+                  /* Show User */
+                  return (
                     <User
                       key={user.id}
                       user={user}
@@ -214,43 +262,24 @@ function App(): JSX.Element {
                       getPosts={getPosts}
                       setShowInfo={showPopup}
                     />
-                    <Post
-                      userPost={data}
-                      viewport={viewPort}
-                      spinner={postSpinner}
-                      postsErrorMsg={postsErrorMsg}
-                      clousePost={clousePost}
-                    />
-                  </React.Fragment>
-                );
-              } else {
-                /* Show User */
-                return (
-                  <User
-                    key={user.id}
-                    user={user}
-                    userSrc={userImage}
-                    viewPort={viewPort}
-                    getPosts={getPosts}
-                    setShowInfo={showPopup}
-                  />
-                );
-              }
-            })}
-          {spinner === true && usersErrorMsg.length === 0 && (
-            <Spinner
-              size={SpinnerSize.large}
-              styles={{
-                root: {
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%,-50%)",
-                },
-              }}
-            />
-          )}
-          {usersErrorMsg.length > 0 && <ErrorMessage msg={usersErrorMsg} />}
+                  );
+                }
+              })}
+            {spinner === true && usersErrorMsg.length === 0 && (
+              <Spinner
+                size={SpinnerSize.large}
+                styles={{
+                  root: {
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%,-50%)",
+                  },
+                }}
+              />
+            )}
+            {usersErrorMsg.length > 0 && <ErrorMessage msg={usersErrorMsg} />}
+          </div>
         </div>
       </main>
       <footer className="footer">
@@ -259,15 +288,14 @@ function App(): JSX.Element {
           horizontalAlign="space-between"
           verticalAlign="center"
           styles={{
-            root: {
-              maxWidth: 1600,
-              margin: "0 auto",
-            },
+            root: {},
           }}
           tokens={{ padding: "30px 0" }}
           className="footerContentWrapper"
         >
-          <img src={logo} alt="Logo" className="logo logoSmall" />
+          <a href="https://aalto.it/" target="_blanc">
+            <img src={logo} alt="Logo" className="logo logoSmall" />
+          </a>
           <p className="footerCoopyright">© All rights reserved</p>
         </Stack>
       </footer>

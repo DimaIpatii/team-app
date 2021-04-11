@@ -7,3 +7,127 @@ body {
   font-family: "Karbon Regular";
   font-weight: bold;
 }
+
+/* ********************************************************
+Footer:
+*********************************************************/
+.footerContentWrapper {
+  & a {
+    line-height: 0;
+  }
+}
+
+.footerCoopyright {
+  font-size: $text-l;
+  color: $text-color-light;
+
+  @include viewport("tab-port") {
+    font-size: $text-m;
+  }
+}
+
+/* ********************************************************
+Main:
+*********************************************************/
+.mainCaption {
+  font-size: $text-xxl;
+  text-transform: uppercase;
+  color: $primary;
+}
+
+/* ********************************************************
+Popup Component:
+*********************************************************/
+/* Typography for Sweet Alert Components */
+.popupCloseBtn {
+  font-family: "Karbon Regular";
+  color: $text-color;
+  font-size: 16px;
+
+  &:hover {
+    color: $bg-secondary;
+  }
+}
+
+/* Typography for Custom Popup Components */
+.popupContent {
+  color: $text-color;
+}
+
+.popupUser {
+  &Info {
+    text-align: start;
+
+    @include viewport("tab-port") {
+      text-align: center;
+    }
+  }
+
+  &FullName {
+    font-size: $text-xl;
+    color: $primary;
+  }
+  &Name {
+    font-size: $text-l;
+    text-transform: uppercase;
+
+    & span {
+      font-size: $text-m;
+      text-transform: none;
+    }
+  }
+  &Email {
+    font-size: $text-l;
+    color: $primary;
+  }
+}
+
+.popupUserContact {
+  text-align: start;
+
+  &Label {
+    font-size: $text-l;
+    text-transform: uppercase;
+  }
+  & p {
+    font-size: $text-m;
+  }
+}
+
+/* ********************************************************
+Post Component:
+*********************************************************/
+.post {
+  @include viewport("tab-port") {
+    text-align: start;
+  }
+
+  &AuthorName {
+    font-size: $text-xl;
+    color: $primary;
+    line-height: 1.2;
+  }
+  &Caption {
+    font-size: $text-xl;
+    color: $primary;
+  }
+  &Paragraph {
+    font-size: $text-m;
+  }
+}
+
+/* ********************************************************
+User Component:
+*********************************************************/
+.user {
+  text-align: center;
+
+  &Name {
+    font-size: $text-xl;
+  }
+  &Mail a {
+    font-size: $text-l;
+    list-style: none;
+    color: $primary;
+  }
+}
