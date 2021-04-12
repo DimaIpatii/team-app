@@ -226,29 +226,13 @@ function App(): JSX.Element {
                         getPosts={getPosts}
                         setShowInfo={showPopup}
                       />
-                      {data.posts.length > 0 ? (
-                        <Post
-                          userPost={data}
-                          viewport={viewPort}
-                          spinner={postSpinner}
-                          postsErrorMsg={postsErrorMsg}
-                          clousePost={clousePost}
-                        />
-                      ) : (
-                        <div className="postWrapper">
-                          <Spinner
-                            size={SpinnerSize.large}
-                            styles={{
-                              root: {
-                                position: "absolute",
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%,-50%)",
-                              },
-                            }}
-                          />
-                        </div>
-                      )}
+                      <Post
+                        userPost={data}
+                        viewport={viewPort}
+                        spinner={postSpinner}
+                        postsErrorMsg={postsErrorMsg}
+                        clousePost={clousePost}
+                      />
                     </React.Fragment>
                   );
                 } else {

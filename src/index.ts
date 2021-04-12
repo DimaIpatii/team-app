@@ -1,13 +1,18 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const autoprefixer = require("autoprefixer");
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+autoprefixer();
+
 /* Components */
 import App from "./ui/App";
 import reportWebVitals from "./reportWebVitals";
 
 const render = () => {
   const html = document.getElementById("root");
-  if (!html) throw new Error("No such Element");
+  if (!html) throw new Error("No such root element found!");
   if (html) {
     ReactDOM.render(React.createElement(App), html);
   }
