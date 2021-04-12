@@ -6,6 +6,9 @@ import InfoMessage from "./InfoMessage";
 /* Typescript */
 import { IPopupComponentProps } from "../../types";
 
+/* Styles  */
+import { primaryButtonStyle } from "../../styles/fluent_ui/styles";
+
 const Popup: React.FunctionComponent<IPopupComponentProps> = ({
   userData,
   imgSrc,
@@ -51,17 +54,7 @@ const Popup: React.FunctionComponent<IPopupComponentProps> = ({
             href="https://aalto.it/"
             target="_blank"
             text="visit website"
-            styles={{
-              root: {
-                borderRadius: "none",
-                backgroundColor: "#006ba1",
-                width: 150,
-                height: 40,
-                fontSize: 18,
-                textTransform: "uppercase",
-                padding: "0 10px",
-              },
-            }}
+            styles={primaryButtonStyle()}
           />
         </div>
       </div>

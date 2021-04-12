@@ -83,7 +83,7 @@
 
     @include viewport("tab-port") {
       animation-name: none;
-      animation-duration: 0;
+      animation-duration: none;
     }
   }
 }
@@ -104,8 +104,6 @@
     background-color: $bg-primary;
     padding: 0rem;
     border-radius: 0rem;
-    animation-name: none;
-    animation-duration: none;
   }
 
   &Show {
@@ -115,7 +113,7 @@
 
     @include viewport("tab-port") {
       animation-name: none;
-      animation-duration: 0;
+      animation-duration: none;
     }
   }
   &Hide {

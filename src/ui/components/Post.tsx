@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 /* Components */
-import { Spinner, SpinnerSize, IconButton } from "@fluentui/react";
+import { Spinner, SpinnerSize, IconButton, IIconProps } from "@fluentui/react";
 import { initializeIcons } from "@uifabric/icons";
 import InfoMessage from "./InfoMessage";
 initializeIcons();
 
 /* Types */
 import { IPostComponentProps } from "../../types";
+
+/* Styles */
+import {
+  spinnerStyles,
+  clouseIconButtonStyle,
+} from "../../styles/fluent_ui/styles";
 
 const Post: React.FunctionComponent<IPostComponentProps> = ({
   userPost,
@@ -19,6 +25,7 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
   const { user, posts } = userPost;
   const [hide, setHide] = useState(false);
   const [hideWrapper, setHideWrapper] = useState(false);
+  const IconProps: IIconProps = { iconName: "ErrorBadge" };
 
   useEffect(() => {
     if (!hide) return;
@@ -31,25 +38,13 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
         hideWrapper === true ? "postWrapperHide" : "postWrapperShow"
       }`}
     >
-      {spinner && (
-        <Spinner
-          size={SpinnerSize.large}
-          styles={{
-            root: {
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-            },
-          }}
-        />
-      )}
+      {spinner && <Spinner size={SpinnerSize.large} styles={spinnerStyles} />}
 
       {!spinner && (
         <div className={`post ${hide === true ? "postHide" : "postShow"}`}>
           {viewport > 768 && (
             <IconButton
-              iconProps={{ iconName: "ErrorBadge" }}
+              iconProps={IconProps}
               title="ErrorBadge"
               onClick={() => {
                 setTimeout(() => {
@@ -59,26 +54,7 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
                 }, 1000);
                 setHide(true);
               }}
-              styles={{
-                root: {
-                  position: "absolute",
-                  top: 25,
-                  right: 25,
-                  backgroundColor: "transparent",
-                  zIndex: 100,
-                },
-                rootHovered: {
-                  backgroundColor: "transparent",
-                },
-                icon: {
-                  width: 30,
-                  height: 30,
-                  fontSize: 20,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-              }}
+              styles={clouseIconButtonStyle()}
             />
           )}
           <h3 className="postAuthorName">
