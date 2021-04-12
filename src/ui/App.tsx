@@ -26,6 +26,7 @@ import postsEndpoint from "../data/postsEndpoint";
 import useFetch from "../helpers/useFetch";
 import useFetchPosts from "../helpers/useFetchPosts";
 import { getLastElId } from "../helpers/getLastElId";
+import { scrollToChild } from "../helpers/scrollToChild";
 
 function App(): JSX.Element {
   const MySwal = withReactContent(Swal);
@@ -42,6 +43,8 @@ function App(): JSX.Element {
   const currIconId = useRef<number | null>(null);
   const usersContainer = useRef<HTMLDivElement | null>(null);
   const [data, setData] = useState<IUserData>({ user: {}, posts: [] });
+
+  /* ******************************************************************* */
 
   const getPosts = (userId: number) => {
     currId.current = userId;
@@ -79,26 +82,6 @@ function App(): JSX.Element {
     });
   };
 
-  const scrollToChild = () => {
-    if (usersContainer.current && currId.current !== null) {
-      const parrent = usersContainer.current;
-      const parrentsChildren: any[] = Array.from(
-        usersContainer.current.children
-      );
-
-      const children: HTMLElement = parrentsChildren[currId.current - 1];
-      console.log(children.offsetTop, parrent.offsetTop);
-      const root = document.querySelector(".root");
-      if (root) {
-        window.scrollTo({
-          top: children.offsetTop - parrent.offsetTop,
-          //top: 200,
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
   /* ********************************************************* */
 
   /* Posts Handler */
@@ -111,8 +94,13 @@ function App(): JSX.Element {
     }
 
     if (posts.length === 0) return;
-    if (viewPort > 400 && !showInfo && currId.current !== null) {
-      scrollToChild();
+    if (
+      viewPort > 400 &&
+      !showInfo &&
+      currId.current !== null &&
+      usersContainer.current !== null
+    ) {
+      scrollToChild(usersContainer.current, currId.current);
       setData({
         user: users[currId.current - 1],
         posts: posts,
@@ -210,34 +198,8 @@ function App(): JSX.Element {
               usersErrorMsg.length === 0 &&
               spinner === false &&
               users.map((user) => {
-                /* Shows User + Post */
-                if (
-                  lastUserId.current === user.id &&
-                  data.user &&
-                  viewPort > 768
-                ) {
-                  return (
-                    <React.Fragment key={user.id}>
-                      <User
-                        key={user.id}
-                        user={user}
-                        userSrc={userImage}
-                        viewPort={viewPort}
-                        getPosts={getPosts}
-                        setShowInfo={showPopup}
-                      />
-                      <Post
-                        userPost={data}
-                        viewport={viewPort}
-                        spinner={postSpinner}
-                        postsErrorMsg={postsErrorMsg}
-                        clousePost={clousePost}
-                      />
-                    </React.Fragment>
-                  );
-                } else {
-                  /* Show User */
-                  return (
+                return (
+                  <React.Fragment key={user.id}>
                     <User
                       key={user.id}
                       user={user}
@@ -246,8 +208,20 @@ function App(): JSX.Element {
                       getPosts={getPosts}
                       setShowInfo={showPopup}
                     />
-                  );
-                }
+                    {/* Show Post */}
+                    {lastUserId.current === user.id &&
+                      data.user &&
+                      viewPort > 768 && (
+                        <Post
+                          userPost={data}
+                          viewport={viewPort}
+                          spinner={postSpinner}
+                          postsErrorMsg={postsErrorMsg}
+                          clousePost={clousePost}
+                        />
+                      )}
+                  </React.Fragment>
+                );
               })}
             {spinner === true && usersErrorMsg.length === 0 && (
               <Spinner

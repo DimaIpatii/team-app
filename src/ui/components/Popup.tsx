@@ -52,7 +52,15 @@ const Popup: React.FunctionComponent<IPopupComponentProps> = ({
             target="_blank"
             text="visit website"
             styles={{
-              root: { borderRadius: "none", backgroundColor: "#006ba1" },
+              root: {
+                borderRadius: "none",
+                backgroundColor: "#006ba1",
+                width: 150,
+                height: 40,
+                fontSize: 18,
+                textTransform: "uppercase",
+                padding: "0 10px",
+              },
             }}
           />
         </div>

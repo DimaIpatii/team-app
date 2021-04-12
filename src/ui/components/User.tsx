@@ -27,6 +27,7 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
     width: "100%",
   };
 
+  console.log("User");
   return (
     <div key={user.id} ref={elRef} data-userid={user.id} className={`user`}>
       <div className="userInner">
@@ -39,8 +40,6 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
             onClick={() => setShowInfo(user.id)}
             styles={{
               root: {
-                animation: "none",
-                transition: "none",
                 cursor: "pointer",
               },
             }}
@@ -57,7 +56,13 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
               setOpen(!open);
             }}
             styles={{
-              root: { borderRadius: "none", backgroundColor: "#006BA1" },
+              root: {
+                borderRadius: "none",
+                backgroundColor: "#006BA1",
+                width: 150,
+                height: 40,
+                fontSize: 18,
+              },
             }}
             text="READ POST"
           />

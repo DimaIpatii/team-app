@@ -73,4 +73,11 @@ User Component:
   @include viewportAt(768px) {
     flex-basis: 50%;
   }
+
+  &Inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

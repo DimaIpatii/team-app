@@ -23,6 +23,10 @@
   position: relative;
 
   @include calcPaddingRight;
+
+  @include viewport("tab-port") {
+    margin: 2rem 0 0 0;
+  }
 }
 
 .post {
@@ -40,6 +44,9 @@
   @include viewport("tab-port") {
     background-color: $bg-primary;
     padding: 0rem;
+    border-radius: 0rem;
+    animation-name: none;
+    animation-duration: none;
   }
 
   &Hide {

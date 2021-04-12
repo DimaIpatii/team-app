@@ -4,7 +4,7 @@
   border-radius: 0px;
   padding: 5rem;
 
-  @include viewport("phone") {
+  @include viewport("tab-port") {
     padding: 2rem;
   }
 
@@ -33,7 +33,7 @@
 
   @include viewport("tab-port") {
     &Image {
-      @include size(15rem);
+      @include size(12rem);
     }
   }
 
