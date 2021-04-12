@@ -10,6 +10,9 @@ import { PrimaryButton, Image, ImageFit } from "@fluentui/react";
 /* Types */
 import { IUserComponentProps } from "../../types";
 
+/* Styles  */
+import { imageStyles, primaryButtonStyle } from "../../styles/fluent_ui/styles";
+
 const User: React.FunctionComponent<IUserComponentProps> = ({
   user,
   userSrc,
@@ -20,28 +23,16 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
   const [open, setOpen] = useState(false);
   const elRef = useRef(null);
 
-  const imageProps = {
-    src: userSrc,
-    imageFit: ImageFit.cover,
-    height: "100%",
-    width: "100%",
-  };
-
   return (
     <div key={user.id} ref={elRef} data-userid={user.id} className={`user`}>
       <div className="userInner">
         <div className="userImageWrapper">
           <Image
-            {...imageProps}
-            height={"100%"}
-            width={"100%"}
+            src={userSrc}
+            imageFit={ImageFit.cover}
             alt="userImage"
+            styles={imageStyles}
             onClick={() => setShowInfo(user.id)}
-            styles={{
-              root: {
-                cursor: "pointer",
-              },
-            }}
           />
         </div>
         <h2 className="userName">{user.name}</h2>
@@ -54,15 +45,7 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
               getPosts(user.id);
               setOpen(!open);
             }}
-            styles={{
-              root: {
-                borderRadius: "none",
-                backgroundColor: "#006BA1",
-                width: 150,
-                height: 40,
-                fontSize: 18,
-              },
-            }}
+            styles={primaryButtonStyle()}
             text="READ POST"
           />
         )}

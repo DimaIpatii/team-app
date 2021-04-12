@@ -4,6 +4,7 @@ import withReactContent from "sweetalert2-react-content";
 
 /* Styles */
 import "../index.scss";
+import { spinnerStyles } from "../styles/fluent_ui/styles";
 /* Types */
 import { IUserData } from "../types";
 /* Assets */
@@ -224,17 +225,7 @@ function App(): JSX.Element {
                 );
               })}
             {spinner === true && usersErrorMsg.length === 0 && (
-              <Spinner
-                size={SpinnerSize.large}
-                styles={{
-                  root: {
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%,-50%)",
-                  },
-                }}
-              />
+              <Spinner size={SpinnerSize.large} styles={spinnerStyles} />
             )}
             {usersErrorMsg.length > 0 && <ErrorMessage msg={usersErrorMsg} />}
           </div>

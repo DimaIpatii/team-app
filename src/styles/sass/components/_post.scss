@@ -80,6 +80,11 @@
 
     animation-name: displayWrapper;
     animation-duration: 1s;
+
+    @include viewport("tab-port") {
+      animation-name: none;
+      animation-duration: none;
+    }
   }
 }
 
@@ -99,14 +104,17 @@
     background-color: $bg-primary;
     padding: 0rem;
     border-radius: 0rem;
-    animation-name: none;
-    animation-duration: none;
   }
 
   &Show {
     transform: translateY(0%);
     animation-name: displayPosts;
     animation-duration: 1s;
+
+    @include viewport("tab-port") {
+      animation-name: none;
+      animation-duration: none;
+    }
   }
   &Hide {
     padding: 0rem;
