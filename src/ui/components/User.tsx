@@ -27,7 +27,6 @@ const User: React.FunctionComponent<IUserComponentProps> = ({
     width: "100%",
   };
 
-  console.log("User");
   return (
     <div key={user.id} ref={elRef} data-userid={user.id} className={`user`}>
       <div className="userInner">
