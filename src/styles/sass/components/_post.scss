@@ -80,6 +80,11 @@
 
     animation-name: displayWrapper;
     animation-duration: 1s;
+
+    @include viewport("tab-port") {
+      animation-name: none;
+      animation-duration: 0;
+    }
   }
 }
 
@@ -107,6 +112,11 @@
     transform: translateY(0%);
     animation-name: displayPosts;
     animation-duration: 1s;
+
+    @include viewport("tab-port") {
+      animation-name: none;
+      animation-duration: 0;
+    }
   }
   &Hide {
     padding: 0rem;
