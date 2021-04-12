@@ -107,13 +107,23 @@ Post Component:
     color: $primary;
     line-height: 1.2;
   }
-  &Caption {
+
+  &Content {
+    & h3 {
+      font-size: $text-xl;
+      color: $primary;
+    }
+    & p {
+      font-size: $text-m;
+    }
+  }
+  /* &Caption {
     font-size: $text-xl;
     color: $primary;
   }
   &Paragraph {
     font-size: $text-m;
-  }
+  } */
 }
 
 /* ********************************************************

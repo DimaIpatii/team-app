@@ -131,10 +131,10 @@
     }
   }
 
-  &Caption {
-    margin-bottom: 3rem;
-  }
-  &Paragraph {
-    margin-bottom: 3rem;
+  &Content {
+    & h3,
+    & p {
+      margin-bottom: 3rem;
+    }
   }
 }

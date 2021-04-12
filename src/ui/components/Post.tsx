@@ -94,10 +94,10 @@ const Post: React.FunctionComponent<IPostComponentProps> = ({
                   post.body.charAt(0).toUpperCase() + post.body.slice(1);
                 return (
                   <React.Fragment key={post.title}>
-                    <h3 className="postCaption">
+                    <h3>
                       {index + 1}. {title}.
                     </h3>
-                    <p className="postParagraph">{paragraph}.</p>
+                    <p>{paragraph}.</p>
                   </React.Fragment>
                 );
               })}
